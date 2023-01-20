@@ -12,8 +12,10 @@ const initialData = {
             title: "Planned Tasks",
             style: {
                 width: 280,
-                minHeight: '50vh'
+                minHeight: '50vh',
+                background: 'white'
             },
+            cardStyle: { color: '#59bb9a' },
             cards: []
         },
         {
@@ -21,8 +23,10 @@ const initialData = {
             title: "Work In Progress",
             style: {
                 width: 280,
-                minHeight: '50vh'
+                minHeight: '50vh',
+                background: 'white'
             },
+            cardStyle: { color: '#59bb9a' },
             cards: []
         },
         {
@@ -30,8 +34,10 @@ const initialData = {
             title: "Completed",
             style: {
                 width: 280,
-                minHeight: '50vh'
+                minHeight: '50vh',
+                background: 'white'
             },
+            cardStyle: { color: '#d2ae6d' },
             cards: []
         }
     ]
@@ -53,13 +59,10 @@ const Home = () => {
                     description: el.description
                 }
                 if (el.status == data.lanes[0].id) {
-                    // data.lanes[0]['cards'] = [...data.lanes[0]['cards'], obj];
                     lane1.push(obj);
                 } else if (el.status == data.lanes[1].id) {
-                    // data.lanes[1]['cards'] = [...data.lanes[1]['cards'], obj];
                     lane2.push(obj);
                 } else if (el.status == data.lanes[2].id) {
-                    // data.lanes[2]['cards'] = [...data.lanes[2]['cards'], obj];
                     lane3.push(obj);
                 }
             });
@@ -70,7 +73,6 @@ const Home = () => {
         }).catch((err) => console.log(err))
     }, [count]);
     const dragStart = (cardId, laneId) => {
-        // console.log(cardId, laneId, 'drag start ho gya bhai')
         setCount((prev) => prev + 1)
     }
     const dragEnd = (cardId, sourceLaneId, targetLaneId, position, cardDetails) => {
@@ -103,6 +105,7 @@ const Home = () => {
             <Board
                 data={data}
                 draggable
+                style={{ backgroundColor: '#d6d6d6 !important', justifyContent: 'center', display: 'flex' }}
                 laneDraggable={false}
                 editable
                 handleDragEnd={(cardId, sourceLaneId, targetLaneId, position, cardDetails) => dragEnd(cardId, sourceLaneId, targetLaneId, position, cardDetails)}
